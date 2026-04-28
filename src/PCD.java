@@ -1,6 +1,9 @@
 import java.util.ArrayList;
 import java.util.List;
 
+// Universidade não decide mais quando executa o update(). Ela apenas disponibiliza o método e espera ser chamada.
+// Quem decide a hora é a PCD ao chamar notifyObservers(). O controle do fluxo foi invertido.
+
 public class PCD implements IObservavel {
 
     private Double temp;
@@ -23,7 +26,7 @@ public class PCD implements IObservavel {
     @Override
     public void notifyObservers(Object dados) {
         for (IObserver observer : observers) {
-            observer.update(dados);
+            observer.update(dados); // ← chama sem saber quem é
         }
     }
 
